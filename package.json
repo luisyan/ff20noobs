@@ -1,25 +1,24 @@
 {
   "name": "ff20noobs",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "League of legends - website to check in-game status",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:luisyan/ff20noobs.git"
+    "url": "git+https://github.com/luisyan/ff20noobs.git"
   },
-  "author": "Yan Liu",
-  "license": "MIT",
-  "devDependencies": {
-    "del": "^2.2.1",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^2.0.11",
-    "gulp-concat": "^2.6.0",
-    "gulp-if": "^2.0.1",
-    "gulp-jsonminify": "^1.0.0",
-    "gulp-minify-html": "^1.0.6",
-    "gulp-uglify": "^1.5.4",
-    "gulp-util": "^3.0.7"
+  "author": "Yan Liu <ly.louis@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisyan/ff20noobs/issues"
+  },
+  "homepage": "https://github.com/luisyan/ff20noobs#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "express": "^4.14.0",
+    "jquery": "^3.1.0"
   }
 }
