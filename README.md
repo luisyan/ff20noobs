@@ -10,7 +10,7 @@ To start development, you need to install:
   4. Bower
 
 Installation
-  1. git clone [git@github.com:luisyan/ff20noobs.git]()
+  1. git clone [git@github.com:luisyan/ff20noobs.git](https://github.com/luisyan/ff20noobs)
   2. npm install
   3. bower install
 
