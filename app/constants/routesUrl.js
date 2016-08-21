@@ -1,3 +1,5 @@
 module.exports = {
-    FIRST : '/'
+    FIRST : '/',
+    FEATURED: '/featured',
+    PLAYER: '/player'
 }

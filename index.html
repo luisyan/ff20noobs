@@ -3,12 +3,28 @@
 <head lang="en">
 	<meta charset="UTF-8">
 	<title></title>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="debugPage/testAPI.js"></script>
 </head>
 <body>
-<h1>This is a test page</h1>
-<button testDiv>test button</button>
-<div debugResult></div>
+<h1 class="spacing">This is a test page</h1>
+<p class="spacing">
+	<button testDiv class="btn btn-sm btn-primary">test button</button>
+</p>
+
+
+<p class="spacing">
+	<input id="ipt_playerByName" type="text" placeholder="player name"/>
+	<button id="btn_playerByName" class="btn btn-sm btn-primary">get player by name</button>
+</p>
+
+<div class="spacing" debugResult></div>
 </body>
+
+<style>
+	.spacing {
+		margin: 15px;
+	}
+</style>
 </html>
