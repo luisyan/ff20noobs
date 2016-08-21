@@ -19,8 +19,8 @@ Start on Aug.19, 2016
 &emsp;(update to Aug 21)  
 &emsp;(put /api before each api)
   - get featured game: GET /featured
-  - get player info by id: GET /player?{name}&[region]
-  - get current game by player name: GET /current?{name}
+  - get player info by name: GET /player?{name}&[region]
+  - get current game by player name: GET /current?{name}&[region]
 
 ####Test with browser:  
 &emsp;(Default port is set to 16000)  
