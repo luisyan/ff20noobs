@@ -3,9 +3,13 @@
  */
 var bodyParser = require('body-parser');
 
-module.exports =  function (app, router) {
-    //add /api to all requested url
-    app.use('/api', router);
+module.exports =  function (app) {
+    //check parameters before passing to handlers
+    app.use( function ( req, res, next ) {
+        console.log('[before every api call] %s %s %s', req.method, req.url, req.path );
+        next();
+    } );
+
     //parse parameters of post
     app.use( bodyParser.json() );
     app.use(bodyParser.urlencoded({
@@ -18,12 +22,5 @@ module.exports =  function (app, router) {
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
     });
-
-    //check parameters before passing to handlers
-    router.use( function ( req, res, next ) {
-        console.log('[before every api call] %s %s %s', req.method, req.url, req.path );
-        console.log('[query: %s params: %s]', req.query.name, req.params.name)
-        next();
-    } );
 
 }

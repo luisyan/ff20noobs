@@ -4,5 +4,7 @@ var myModule = require('./apiHandlers' ),
 module.exports = {
     firstRouteHandler: instance.firstHandler,
     featuredGame: instance.getFeaturedGames,
-    playerByName: instance.getPlayerByName
+    playerByName: instance.getPlayerByName,
+    err404: instance.handle404,
+    onGoingGame: instance.getCurrentGame
 }

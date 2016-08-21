@@ -12,13 +12,5 @@ module.exports =  function (app) {
         // res.send({errCode: err.status, errorMsg: err.message, method: req.method, url: req.url});
         next(err);
     });
-    app.use(function(req, res, next) {
-        logger.info(req.path);
-        var err = new Error('Not Found, Invalid path');
-        logger.error(err);
-        err.status = 404;
-        res.status(err.status);
-        res.send({errCode: err.status, errorMsg: err.message, method: req.method, url: req.url});
-    });
     // app.use(errorHandler());
 }

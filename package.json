@@ -18,9 +18,11 @@
   "homepage": "https://github.com/luisyan/ff20noobs#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "consign": "^0.1.2",
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
     "leagueapi": "^0.4.21",
+    "q": "^1.4.1",
     "tracer": "^0.8.3"
   }
 }
