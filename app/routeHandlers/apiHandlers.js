@@ -2,7 +2,10 @@ var logger = require('../util/logger').logger;
 var leagueAPI = require('leagueapi');
 var myAPI = require('../lib/myAPI');
 var DEFAULT = require('../constants/gameDefault');
+var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
+var fs = require('fs');
+var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
 
 module.exports =  function () {
     this.firstHandler = function (req, res, next) {
@@ -13,7 +16,7 @@ module.exports =  function () {
     this.getFeaturedGames = function (req , res, next) {
         leagueAPI.getFeaturedGames('na')
             .then(function (data) {
-            res.json(data);
+            res.json(resSuccess(data));
         }, function (err) {
             logger.error(err);
             return next(err);
@@ -25,15 +28,19 @@ module.exports =  function () {
             region = req.query.region;
         if (!region) region = DEFAULT.REGION;
 
-        leagueAPI.Summoner.getByName(name, region)
-            .then(function (data) {
-                for (var i in data) {
-                    res.json(data[i]);
-                }
-        }, function (err) {
-            logger.error(err);
-            return next(err);
-        });
+        if (!name) {
+            res.json(resFail(null));
+        } else {
+            leagueAPI.Summoner.getByName(name, region)
+                .then(function (data) {
+                    for (var i in data) {
+                        res.json(resSuccess(data[i]));
+                    }
+                }, function (err) {
+                    logger.error(err);
+                    return next(err);
+                });
+        }
     };
 
     this.getCurrentGame = function (req , res , next) {
@@ -41,22 +48,35 @@ module.exports =  function () {
             region = req.query.region;
         if (!region) region = DEFAULT.REGION;
 
-        leagueAPI.Summoner.getByName(pName, region)
-            .then(function (data) {
-                for (var i in data) {
-                    var pid = data[i].id;
-                }
-                myAPI.getCurrentGame(pid, region)
-                    .then(function (data) {
-                    res.json(data);
+        if (!pName) {
+            res.json(resFail(null));
+        } else {
+            leagueAPI.Summoner.getByName(pName, region)
+                .then(function (data) {
+                    for (var i in data) {
+                        var pid = data[i].id;
+                    }
+                    if (pid) console.log('got pid %s, getting current game', pid);
+                    else {
+                        logger.warn('got wrong pid', pid);
+                        res.json(resFail(null));
+                    }
+                    myAPI.myAPIgetCurrentGame(pid, region)
+                        .then(function (data) {
+                            var runeArray = data.data.participants;
+                            for (var i in runeArray) {
+                                runeArray[i].formattedRunes = runeFormatter(runeLib, runeArray[i].runes);
+                            }
+                            res.json(data);
+                        }, function (err) {
+                            logger.error(err);
+                            return next(err);
+                        });
                 }, function (err) {
                     logger.error(err);
                     return next(err);
                 });
-            }, function (err) {
-                logger.error(err);
-                return next(err);
-            });
+        }
     };
 
     this.handle404 = function (req , res , next) {
@@ -69,4 +89,9 @@ module.exports =  function () {
     }
 }
 
-
+function resSuccess(data) {
+    return {resultCode: 0, data: data};
+}
+function resFail(data) {
+    return {resultCode: 1, data: data};
+}

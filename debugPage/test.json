@@ -1,0 +1,20 @@
+{
+  FlatPhysicalDamageMod: {
+    finalNumber: '14.89',
+    description: '14.89 attack damage'
+  },
+  PercentLifeStealMod: {
+    finalNumber: '4.50',
+    description: '4.50% Life Steal.'
+  }
+}
+{
+  FlatPhysicalDamageMod: {
+    finalNumber: '14.89',
+    description: '14.89 attack damage'
+  },
+  PercentLifeStealMod: {
+    finalNumber: '4.50',
+    description: '4.50% Life Steal.'
+  }
+}

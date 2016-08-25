@@ -22,7 +22,9 @@
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
     "leagueapi": "^0.4.21",
+    "mongodb": "^2.2.7",
     "q": "^1.4.1",
+    "request": "^2.74.0",
     "tracer": "^0.8.3"
   }
 }
