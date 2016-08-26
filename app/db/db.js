@@ -15,7 +15,7 @@ module.exports = {
         var d = $q.defer();
         playerCollection.find({name: {$regex: name, $options: 'i'}}).limit(1).toArray(function (err , result) {
             if (err) d.reject(err);
-            else d.resolve(result[0]);
+            else d.resolve(result);
         })
         return d.promise;
     },

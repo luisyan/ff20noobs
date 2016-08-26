@@ -10,6 +10,7 @@ var fs = require('fs');
 var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
 
 module.exports =  function () {
+    var self = this;
     this.firstHandler = function (req, res, next) {
         logger.info( req.body )
         res.json( {msg : 'this is your msg:' + req.body.msg} );
@@ -21,13 +22,11 @@ module.exports =  function () {
             res.json(resSuccess(data));
         }, function (err) {
             logger.error(err);
-            return next(err);
+            next(err);
         });
     };
 
     this.getPlayerByName = function (req , res, next) {
-        var d = $q.defer(),
-            p = d.promise;
         var name = req.query.name,
             region = req.query.region;
         if (!region) region = DEFAULT.REGION;
@@ -35,38 +34,14 @@ module.exports =  function () {
         if (!name) {
             res.json(resFail(null));
         } else {
-            mongo.findPlayer(name).then(function (dbResult) {
-                if (dbResult.length == 0) {
-                    console.log('db doesn\'t contain this player, calling riot API...')
-                    d.reject();
-                } else {
-                    d.resolve(dbResult);
-                }
+            fnGetPlayer(name , region).then(function (result) {
+                res.json(resSuccess(result));
             }, function (err) {
-                logger.error(err);
-                return next(err);
+                next(err);
             })
         }
 
-        p.then(function (dbResult) {
-            console.log('Got ['+dbResult.name+'] from db and returning');
-            res.json(resSuccess(dbResult));
-        }, function () {
-            leagueAPI.Summoner.getByName(name, region)
-                .then(function (data) {
-                    for (var i in data) {
-                        console.log('Got data from riot API:', data[i]);
-                        mongo.insertOnePlayer(data[i])
-                            .then(function () {
-                                console.log('Inserted ['+ name +'] into db');
-                                res.json(resSuccess(data[i]));
-                            })
-                    }
-                }, function (err) {
-                    logger.error(err);
-                    return next(err);
-                });
-        })
+
 
 
     };
@@ -79,27 +54,23 @@ module.exports =  function () {
         if (!pName) {
             res.json(resFail(null));
         } else {
-            leagueAPI.Summoner.getByName(pName, region)
-                .then(function (data) {
-                    for (var i in data) {
-                        var pid = data[i].id;
-                    }
-                    if (pid) console.log('got pid %s, getting current game', pid);
-                    else {
+            fnGetPlayer(pName, region)
+                .then(function (result) {
+                    var pid = result.id;
+                    if (!pid) {
                         logger.warn('got wrong pid', pid);
                         res.json(resFail(null));
+                    } else return myAPI.myAPIgetCurrentGame(pid, region);
+            }, function (err) {
+                next(err);
+            })
+                .then(function (data) {
+                    console.log('Got on-going game of ['+pName+']');
+                    var runeArray = data.data.participants;
+                    for (var i in runeArray) {
+                        runeArray[i].formattedRunes = runeFormatter(runeLib, runeArray[i].runes);
                     }
-                    myAPI.myAPIgetCurrentGame(pid, region)
-                        .then(function (data) {
-                            var runeArray = data.data.participants;
-                            for (var i in runeArray) {
-                                runeArray[i].formattedRunes = runeFormatter(runeLib, runeArray[i].runes);
-                            }
-                            res.json(data);
-                        }, function (err) {
-                            logger.error(err);
-                            return next(err);
-                        });
+                    res.json(data);
                 }, function (err) {
                     logger.error(err);
                     return next(err);
@@ -122,4 +93,48 @@ function resSuccess(data) {
 }
 function resFail(data) {
     return {resultCode: 1, data: data};
+}
+
+
+function fnGetPlayer(name, region) {
+    var d1 = $q.defer(),
+        p1 = d1.promise;
+    var d2 = $q.defer(),
+        p2 = d2.promise;
+
+    mongo.findPlayer(name).then(function (dbResult) {
+        if (dbResult.length == 0) {
+            console.log('db doesn\'t have ['+name+']');
+            process.stdout.write('Calling riot API...')
+            d1.reject();
+        } else {
+            d1.resolve(dbResult[0]);
+        }
+    }, function (err) {
+        logger.error(err);
+        console.log('[db error] getting player data from db failed');
+        process.stdout.write('Calling riot API...');
+        d1.reject();
+    });
+
+    p1.then(function (dbResult) {
+        console.log('Got ['+dbResult.name+'] from db');
+        d2.resolve(dbResult);
+    }, function () {
+        leagueAPI.Summoner.getByName(name, region)
+            .then(function (data) {
+                for (var i in data) {
+                    console.log('Got ['+data[i].name+'] from riot API');
+                    mongo.insertOnePlayer(data[i])
+                        .then(function () {
+                            console.log('Inserted ['+ name +'] into db');
+                            d2.resolve(data[i]);
+                        })
+                }
+            }, function (err) {
+                logger.error(err);
+                d2.reject(err);
+            });
+    })
+    return p2;
 }
