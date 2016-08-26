@@ -1,62 +1,6 @@
 /**
  * Created by Yan Liu on 2016-08-24.
  */
-
-
-var mockData = [
-    {
-        count: 9,
-        runeId: 5273
-    },
-    {
-        count: 3,
-        runeId: 5289
-    },
-    {
-        count: 5,
-        runeId: 5296
-    },
-    {
-        count: 1,
-        runeId: 5297
-    },
-    {
-        count: 4,
-        runeId: 5316
-    },
-    {
-        count: 5,
-        runeId: 5319
-    },
-    {
-        count: 3,
-        runeId: 5357
-    }
-]
-
-var mockData2 = [
-    {
-        count: 9,
-        runeId: 5245
-    },
-    {
-        count: 3,
-        runeId: 5290
-    },
-    {
-        count: 6,
-        runeId: 5295
-    },
-    {
-        count: 9,
-        runeId: 5317
-    },
-    {
-        count: 3,
-        runeId: 5335
-    }
-]
-
 exports.combineRunes = function (runeLib, playerRunes, next) {
     var playerRuneGroup = {};
     var calculatedRuneGroup = {};
@@ -74,7 +18,6 @@ exports.combineRunes = function (runeLib, playerRunes, next) {
             }
         }
     }
-    // console.log(playerRuneGroup);
     for (var i in playerRuneGroup) {
         calculatedRuneGroup[i] = {
             finalNumber: 0
@@ -122,5 +65,3 @@ exports.combineRunes = function (runeLib, playerRunes, next) {
         return (secondNum/firstNum).toFixed(2);
     }
 }
-
-// combineRunes(mockData2);

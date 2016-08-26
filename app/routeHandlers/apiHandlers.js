@@ -1,7 +1,9 @@
 var logger = require('../util/logger').logger;
 var leagueAPI = require('leagueapi');
+var $q = require('q');
 var myAPI = require('../lib/myAPI');
 var DEFAULT = require('../constants/gameDefault');
+var mongo = require('../db/db');
 var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
 var fs = require('fs');
@@ -24,6 +26,8 @@ module.exports =  function () {
     };
 
     this.getPlayerByName = function (req , res, next) {
+        var d = $q.defer(),
+            p = d.promise;
         var name = req.query.name,
             region = req.query.region;
         if (!region) region = DEFAULT.REGION;
@@ -31,16 +35,40 @@ module.exports =  function () {
         if (!name) {
             res.json(resFail(null));
         } else {
+            mongo.findPlayer(name).then(function (dbResult) {
+                if (dbResult.length == 0) {
+                    console.log('db doesn\'t contain this player, calling riot API...')
+                    d.reject();
+                } else {
+                    d.resolve(dbResult);
+                }
+            }, function (err) {
+                logger.error(err);
+                return next(err);
+            })
+        }
+
+        p.then(function (dbResult) {
+            console.log('Got ['+dbResult.name+'] from db and returning');
+            res.json(resSuccess(dbResult));
+        }, function () {
             leagueAPI.Summoner.getByName(name, region)
                 .then(function (data) {
                     for (var i in data) {
-                        res.json(resSuccess(data[i]));
+                        console.log('Got data from riot API:', data[i]);
+                        mongo.insertOnePlayer(data[i])
+                            .then(function () {
+                                console.log('Inserted ['+ name +'] into db');
+                                res.json(resSuccess(data[i]));
+                            })
                     }
                 }, function (err) {
                     logger.error(err);
                     return next(err);
                 });
-        }
+        })
+
+
     };
 
     this.getCurrentGame = function (req , res , next) {
