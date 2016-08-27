@@ -8,6 +8,8 @@ var ERR = require('../constants/general').ERR;
 var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
 var fs = require('fs');
+var getSummonerSpell = require('../util/summoner').getSummonerInfo;
+var getChampion = require('../util/champion').getChampionInfo;
 var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
 
 module.exports =  function () {
@@ -41,10 +43,6 @@ module.exports =  function () {
                 next(err);
             })
         }
-
-
-
-
     };
 
     this.getCurrentGame = function (req , res , next) {
@@ -62,24 +60,20 @@ module.exports =  function () {
                         logger.warn('got wrong pid', pid);
                         res.json(resFail(null));
                     } else return myAPI.myAPIgetCurrentGame(pid, region);
-            }, function (err) {
-                next(err);
-            })
+                })
                 .then(function (data) {
                     console.log('Got on-going game of ['+pName+']');
-                    var runeArray = data.data.participants;
-                    for (var i in runeArray) {
-                        runeArray[i].formattedRunes = runeFormatter(runeLib, runeArray[i].runes);
-                    }
+                    filterDataBeforeReturn(data.data);
                     res.json(data);
-                }, function (err) {
+                })
+                .catch(function (err) {
                     logger.error(err);
-                    return next(err);
+                    next(err);
                 });
         }
     };
 
-    this.handle404 = function (req , res , next) {
+    this.handle404 = function (req, res, next) {
         logger.info(req.path);
         var err = new Error('Not Found, Invalid path');
         logger.error(err);
@@ -88,6 +82,9 @@ module.exports =  function () {
         res.send({errCode: err.status, errorMsg: err.message, method: req.method, url: req.url});
     }
 }
+
+
+//------------------------------- functions -------------------------------------------
 
 function resSuccess(data) {
     return {resultCode: 0, data: data};
@@ -134,4 +131,31 @@ function fnGetPlayer(name, region) {
         d.reject(err);
     })
     return d.promise;
+}
+
+function filterDataBeforeReturn(game) {
+    var players = game.participants;
+    var orgnizedParticipants = {Blue: [], Purple: []};
+    for (var i in players) {
+        players[i].team = players[i].teamId == 100 ? 'Blue' : 'Purple';
+        players[i].profileIcon = 'http://ddragon.leagueoflegends.com/cdn/'+require('../util/champion').championVersion+'/img/profileicon/'+players[i].profileIconId+'.png'
+        players[i].champion = getChampion(players[i].championId);
+        players[i].summonerSpell = {spell1: getSummonerSpell(players[i].spell1Id), spell2: getSummonerSpell(players[i].spell2Id)};
+        players[i].formattedRunes = runeFormatter(runeLib, players[i].runes);
+
+        delete players[i].teamId;
+        delete players[i].profileIconId;
+        delete players[i].championId;
+        delete players[i].runes;
+        delete players[i].spell1Id;
+        delete players[i].spell2Id;
+        //---- below is temporary ----
+        delete players[i].summonerId;
+        delete players[i].masteries;
+
+
+        if (players[i].team == 'Blue') orgnizedParticipants.Blue.push(players[i]);
+        else orgnizedParticipants.Purple.push(players[i]);
+    }
+    game.participants = orgnizedParticipants;
 }
