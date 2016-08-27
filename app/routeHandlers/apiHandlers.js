@@ -4,6 +4,7 @@ var $q = require('q');
 var myAPI = require('../lib/myAPI');
 var DEFAULT = require('../constants/gameDefault');
 var mongo = require('../db/db');
+var ERR = require('../constants/general').ERR;
 var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
 var fs = require('fs');
@@ -97,44 +98,40 @@ function resFail(data) {
 
 
 function fnGetPlayer(name, region) {
-    var d1 = $q.defer(),
-        p1 = d1.promise;
-    var d2 = $q.defer(),
-        p2 = d2.promise;
-
+    var d = $q.defer();
     mongo.findPlayer(name).then(function (dbResult) {
-        if (dbResult.length == 0) {
+        if (dbResult.length != 0) {
+            return dbResult[0];
+        } else {
             console.log('db doesn\'t have ['+name+']');
             process.stdout.write('Calling riot API...')
-            d1.reject();
-        } else {
-            d1.resolve(dbResult[0]);
+            return {errType: ERR.DB_EMPTY_FIND};
         }
-    }, function (err) {
+    }).then(function (dbResult) {
+        if (dbResult.hasOwnProperty('errType')) {
+            if (dbResult.errType == ERR.DB_EMPTY_FIND) return leagueAPI.Summoner.getByName(name, region);
+        } else {
+            console.log('Got ['+dbResult.name+'] from db');
+            d.resolve(dbResult);
+        }
+    }).then(function (data) {
+        for (var i in data) {
+            console.log('Got ['+data[i].name+'] from riot API');
+            mongo.insertOnePlayer(data[i])
+                .then(function () {
+                    console.log('Inserted ['+ name +'] into db');
+                    d.resolve(data[i]);
+                })
+        }
+    }).catch(function (err) {
+        if (err.errType == ERR.DB_QUERY_ERR) {
+            logger.error(err);
+            console.log('[db error] getting player data from db failed');
+            process.stdout.write('Calling riot API...');
+        } else throw err;
+    }).catch(function (err) {
         logger.error(err);
-        console.log('[db error] getting player data from db failed');
-        process.stdout.write('Calling riot API...');
-        d1.reject();
-    });
-
-    p1.then(function (dbResult) {
-        console.log('Got ['+dbResult.name+'] from db');
-        d2.resolve(dbResult);
-    }, function () {
-        leagueAPI.Summoner.getByName(name, region)
-            .then(function (data) {
-                for (var i in data) {
-                    console.log('Got ['+data[i].name+'] from riot API');
-                    mongo.insertOnePlayer(data[i])
-                        .then(function () {
-                            console.log('Inserted ['+ name +'] into db');
-                            d2.resolve(data[i]);
-                        })
-                }
-            }, function (err) {
-                logger.error(err);
-                d2.reject(err);
-            });
+        d.reject(err);
     })
-    return p2;
+    return d.promise;
 }

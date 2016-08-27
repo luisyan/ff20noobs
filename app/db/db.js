@@ -4,6 +4,7 @@
 var mongo = require('./initMongo');
 var logger = require('../util/logger').logger;
 var $q = require('q');
+var ERR = require('../constants/general').ERR;
 var playerCollection;
 
 mongo.getDB(function (db) {
@@ -14,7 +15,7 @@ module.exports = {
     findPlayer: function (name) {
         var d = $q.defer();
         playerCollection.find({name: {$regex: name, $options: 'i'}}).limit(1).toArray(function (err , result) {
-            if (err) d.reject(err);
+            if (err) d.reject({errType: ERR.DB_QUERY_ERR, error: err});
             else d.resolve(result);
         })
         return d.promise;
