@@ -12,22 +12,23 @@ Start on Aug.19, 2016
   2. npm install
   3. npm install supervisor -g (auto reload code for development)
 
-####Run  
+####Run
 &emsp;supervisor app.js
-  
-####Available API:  
-&emsp;(update to Aug 21)  
+
+####Available API:
+&emsp;(update to Aug 21)
 &emsp;(put /api before each api)
   - get featured game: GET /featured
   - get player info by name: GET /player?{name}&[region]
   - get current game by player name: GET /current?{name}&[region]
+  - get recent 10 games by player name or id: GET /recent?{name}&[region] or /recent?{id}&[region]
 
-####Test with browser:  
-&emsp;(Default port is set to 16000)  
-&emsp;http://localhost:16000/api/... 
-  
+####Test with browser:
+&emsp;(Default port is set to 16000)
+&emsp;http://localhost:16000/api/...
+
 #####ff20
 
-  
 
-  
+
+

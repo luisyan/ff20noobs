@@ -15,7 +15,6 @@ var getChampion = require('../util/champion').getChampionInfo;
 var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
 
 module.exports =  function () {
-    var self = this;
     this.firstHandler = function (req, res, next) {
         logger.info( req.body )
         res.json( {msg : 'this is your msg:' + req.body.msg} );
@@ -110,6 +109,40 @@ module.exports =  function () {
                 next(err);
             })
         }
+    };
+
+    this.getLeagueRecord = function (req , res , next) {
+        var pName = req.query.name,
+            region = req.query.region,
+            pId = req.query.id;
+
+        if (!region) region = DEFAULT.REGION;
+
+        event.on('getLeagueEntry.gotPlayerId', function(pId) {
+            if (pName) {console.log('Got ID of ['+pName+']...calling riot API to get league entry');}
+            else {console.log('ID ['+pId+'] is given...calling riot API to get league entry');}
+            getLeagueEntry(pId, region)
+                .then(function (result) {
+                    if (pName) {console.log('Got league entry of player ['+pName+']');}
+                    else {console.log('Got league of player ['+pId+']');}
+                    res.json(result);
+                })
+                .catch(function (err) {
+                    res.json(err);
+                })
+        });
+
+
+        // event.emit must be positioned here after event.on is defined in case that id is given
+        if (pId) {
+            event.emit('getLeagueEntry.gotPlayerId', pId);
+        } else {
+            fnGetPlayer(pName , region).then(function (result) {
+                event.emit('getLeagueEntry.gotPlayerId', result.id);
+            }, function (err) {
+                next(err);
+            })
+        }
     }
 
 
@@ -185,12 +218,12 @@ function filterDataBeforeReturn(game) {
 
         delete players[i].teamId;
         delete players[i].profileIconId;
-        // delete players[i].championId; // keep player id for frontend to get match list
+        delete players[i].championId;
         delete players[i].runes;
         delete players[i].spell1Id;
         delete players[i].spell2Id;
         //---- below is temporary ----
-        delete players[i].summonerId;
+        // delete players[i].summonerId; // keep player id for frontend to get match list
         delete players[i].masteries;
 
 
@@ -212,6 +245,8 @@ function getRecentMatches(pId, region) {
             }
             $q.all(fnList).then(function (result) {
                 d.resolve(result);
+            }).catch(function (err) {
+                d.reject(err);
             })
         })
         .catch(function (err) {
@@ -237,7 +272,14 @@ function analyseMatch(pid, matchDetail) {
     }
 
     analysis.isVictory = playerStats.stats.winner;
+    analysis.highestAchievedSeasonTier = playerStats.highestAchievedSeasonTier;
     analysis.champion = getChampion(playerStats.championId);
+    if (playerStats.timeline.role == 'SOLO') analysis.lane = playerStats.timeline.lane;
+    else if (playerStats.timeline.role == 'NONE' && playerStats.timeline.lane == 'JUNGLE') analysis.lane = playerStats.timeline.lane;
+    else {
+        if (playerStats.timeline.role == 'DUO_CARRY') analysis.lane = 'ADC';
+        if (playerStats.timeline.role == 'DUO_SUPPORT') analysis.lane = 'SUPPORT';
+    }
     analysis.kda = {
         kills: playerStats.stats.kills,
         deaths: playerStats.stats.deaths,
@@ -256,4 +298,62 @@ function analyseMatch(pid, matchDetail) {
     if (playerStats.stats.item6 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item6 + '.png'});
 
     return analysis;
+}
+
+function getLeagueEntry(pid, region) {
+    var d = $q.defer();
+
+    $q.all([leagueAPI.getLeagueEntryData(pid, region), leagueAPI.Stats.getRanked(pid, region)])
+        .then(function (result) {
+            var toReturn = {};
+            toReturn.leagueEntry = filterLeagueEntry(result[0]);
+            toReturn.rankStats = filterRankStats(result[1]);
+            d.resolve(toReturn);
+        })
+        .catch(function (err) {
+            d.reject(err);
+        })
+
+    function filterLeagueEntry(entry) {
+        var organizedData;
+        for (var i in entry) {
+            var record = entry[i][0];
+        }
+        organizedData = {
+            tier: record.tier,
+            queue: record.queue,
+            division: record.entries[0].division,
+            leaguePoints: record.entries[0].leaguePoints,
+            wins: record.entries[0].wins,
+            losses: record.entries[0].losses,
+            playstyle: record.entries[0].playstyle
+        };
+        if (record.entries[0].miniSeries) organizedData.miniSeries = record.entries[0].miniSeries;
+        return organizedData;
+
+    };
+
+    function filterRankStats(stats) {
+        var organizedData = {};
+        for (var i in stats) {
+            var championRecord = stats[i];
+            var record = stats[i].stats;
+
+            organizedData[championRecord.id] = {
+                championId: championRecord.id,
+                champion: championRecord.id == 0 ? {name: 'All Champions', url: null} : getChampion(championRecord.id),
+                totalSessionsPlayed: record.totalSessionsPlayed,
+                winningRate: (record.totalSessionsWon*100/record.totalSessionsPlayed).toFixed(0) + '%',
+                averageStats: {
+                    kills: (record.totalChampionKills/record.totalSessionsPlayed).toFixed(1),
+                    deaths: (record.totalDeathsPerSession/record.totalSessionsPlayed).toFixed(1),
+                    assists: (record.totalAssists/record.totalSessionsPlayed).toFixed(1),
+                    cs: (record.totalMinionKills/record.totalSessionsPlayed).toFixed(0),
+                    gold: (record.totalGoldEarned/record.totalSessionsPlayed).toFixed(0)
+                }
+            }
+        }
+        return organizedData;
+    }
+    return d.promise;
 }
