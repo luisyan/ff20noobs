@@ -3,6 +3,7 @@ module.exports = {
     FEATURED: '/featured',
     PLAYER: '/player',
     ON_GOING_GAME: '/current',
+    recentGames: '/recent',
 
 
 

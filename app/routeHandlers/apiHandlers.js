@@ -4,6 +4,8 @@ var $q = require('q');
 var myAPI = require('../lib/myAPI');
 var DEFAULT = require('../constants/gameDefault');
 var mongo = require('../db/db');
+var events = require('events');
+var event = new events.EventEmitter();
 var ERR = require('../constants/general').ERR;
 var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
@@ -72,6 +74,44 @@ module.exports =  function () {
                 });
         }
     };
+
+    this.getRecentGames = function (req , res , next) {
+        var pName = req.query.name,
+            region = req.query.region,
+            pId = req.query.id;
+
+        if (!region) region = DEFAULT.REGION;
+
+        event.on('getRecentGames.gotPlayerId', function(pId) {
+            if (pName) {console.log('Got ID of ['+pName+']...calling riot API to get match list');}
+            else {console.log('ID ['+pId+'] is given...calling riot API to get match list');}
+            getRecentMatches(pId, region)
+                .then(function (result) {
+                    if (pName) {console.log('Got recent games of player ['+pName+']');}
+                    else {console.log('Got recent games of player ['+pId+']');}
+                    var analysedMatches = [];
+                    for (var i in result) {
+                        analysedMatches[i] = analyseMatch(pId , result[i]);
+                    }
+                    res.json(resSuccess(analysedMatches));
+                })
+                .catch(function (err) {
+                    res.json(err);
+                })
+        });
+
+        // event.emit must be positioned here after event.on is defined in case that id is given
+        if (pId) {
+            event.emit('getRecentGames.gotPlayerId', pId);
+        } else {
+            fnGetPlayer(pName , region).then(function (result) {
+                event.emit('getRecentGames.gotPlayerId', result.id);
+            }, function (err) {
+                next(err);
+            })
+        }
+    }
+
 
     this.handle404 = function (req, res, next) {
         logger.info(req.path);
@@ -145,7 +185,7 @@ function filterDataBeforeReturn(game) {
 
         delete players[i].teamId;
         delete players[i].profileIconId;
-        delete players[i].championId;
+        // delete players[i].championId; // keep player id for frontend to get match list
         delete players[i].runes;
         delete players[i].spell1Id;
         delete players[i].spell2Id;
@@ -158,4 +198,62 @@ function filterDataBeforeReturn(game) {
         else orgnizedParticipants.Purple.push(players[i]);
     }
     game.participants = orgnizedParticipants;
+}
+
+function getRecentMatches(pId, region) {
+    var d = $q.defer();
+
+    myAPI.myAPI_getRecentGames(pId, region, 0, 10)
+        .then(function (result) {
+            var matches = result.data;
+            var fnList = [];
+            for (var i in matches) {
+                fnList[i] = myAPI.myAPI_getGame(matches[i].matchId, region);
+            }
+            $q.all(fnList).then(function (result) {
+                d.resolve(result);
+            })
+        })
+        .catch(function (err) {
+            d.reject(err);
+        })
+    return d.promise;
+}
+
+function analyseMatch(pid, matchDetail) {
+    var analysis = {},
+        participantId,
+        playerStats,
+        itemUrlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+require('../util/champion').championVersion+'/img/item/';
+    for (var i in matchDetail.participantIdentities) {
+        if (pid == matchDetail.participantIdentities[i].player.summonerId) {
+            participantId = matchDetail.participantIdentities[i].participantId;
+        }
+    }
+    for (var i in matchDetail.participants) {
+        if (matchDetail.participants[i].participantId == participantId) {
+            playerStats = matchDetail.participants[i];
+        }
+    }
+
+    analysis.isVictory = playerStats.stats.winner;
+    analysis.champion = getChampion(playerStats.championId);
+    analysis.kda = {
+        kills: playerStats.stats.kills,
+        deaths: playerStats.stats.deaths,
+        assists: playerStats.stats.assists
+    };
+    analysis.summonerSpell = {spell1: getSummonerSpell(playerStats.spell1Id), spell2: getSummonerSpell(playerStats.spell2Id)};
+    analysis.formattedRunes = runeFormatter(runeLib, playerStats.runes);
+    analysis.minionsKilled = playerStats.stats.minionsKilled;
+    analysis.items = [];
+    if (playerStats.stats.item0 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item0 + '.png'});
+    if (playerStats.stats.item1 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item1 + '.png'});
+    if (playerStats.stats.item2 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item2 + '.png'});
+    if (playerStats.stats.item3 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item3 + '.png'});
+    if (playerStats.stats.item4 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item4 + '.png'});
+    if (playerStats.stats.item5 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item5 + '.png'});
+    if (playerStats.stats.item6 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item6 + '.png'});
+
+    return analysis;
 }

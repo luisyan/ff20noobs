@@ -6,5 +6,6 @@ module.exports = {
     featuredGame: instance.getFeaturedGames,
     playerByName: instance.getPlayerByName,
     err404: instance.handle404,
-    onGoingGame: instance.getCurrentGame
+    onGoingGame: instance.getCurrentGame,
+    recentGames: instance.getRecentGames
 }

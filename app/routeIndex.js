@@ -14,6 +14,9 @@ module.exports = function (router) {
     router.route(URL_LIST.ON_GOING_GAME)
         .get(handler.onGoingGame);
 
+    router.route(URL_LIST.recentGames)
+        .get(handler.recentGames);
+
 
 
 

@@ -1,11 +1,12 @@
 /**
  * Created by Yan Liu on 2016-08-24.
  */
-exports.combineRunes = function (runeLib, playerRunes, next) {
+exports.combineRunes = function (runeLib, playerRunes) {
     var playerRuneGroup = {};
     var calculatedRuneGroup = {};
     for (var i in playerRunes) {
         var runeId = playerRunes[i].runeId;
+        if (playerRunes[i].rank) playerRunes[i].count = playerRunes[i].rank;
         var stats = runeLib.data[runeId].stats;
         playerRunes[i].description = runeLib.data[runeId].sanitizedDescription;;
         for (var j in stats) {
