@@ -5,7 +5,6 @@ var myAPI = require('../lib/myAPI');
 var DEFAULT = require('../constants/gameDefault');
 var mongo = require('../db/db');
 var events = require('events');
-var event = new events.EventEmitter();
 var ERR = require('../constants/general').ERR;
 var runeFormatter = require('../util/rune').combineRunes;
 leagueAPI.init(process.env.LOLKEY, 'na');
@@ -13,6 +12,8 @@ var fs = require('fs');
 var getSummonerSpell = require('../util/summoner').getSummonerInfo;
 var getChampion = require('../util/champion').getChampionInfo;
 var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
+var CONSTANT = require('../constants/general');
+leagueAPI.setRateLimit(CONSTANT.RATE_LIMIT.TEN_SEC , CONSTANT.RATE_LIMIT.TEN_MIN);
 
 module.exports =  function () {
     this.firstHandler = function (req, res, next) {
@@ -81,6 +82,8 @@ module.exports =  function () {
 
         if (!region) region = DEFAULT.REGION;
 
+        var event = new events.EventEmitter();
+
         event.on('getRecentGames.gotPlayerId', function(pId) {
             if (pName) {console.log('Got ID of ['+pName+']...calling riot API to get match list');}
             else {console.log('ID ['+pId+'] is given...calling riot API to get match list');}
@@ -90,7 +93,12 @@ module.exports =  function () {
                     else {console.log('Got recent games of player ['+pId+']');}
                     var analysedMatches = [];
                     for (var i in result) {
-                        analysedMatches[i] = analyseMatch(pId , result[i]);
+                        if (!result[i].hasOwnProperty('status')) {
+                            analysedMatches[i] = analyseMatch(pId , result[i]);
+                        }
+                        else {
+                            analysedMatches[i] = null;
+                        }
                     }
                     res.json(resSuccess(analysedMatches));
                 })
@@ -117,6 +125,8 @@ module.exports =  function () {
             pId = req.query.id;
 
         if (!region) region = DEFAULT.REGION;
+
+        var event = new events.EventEmitter();
 
         event.on('getLeagueEntry.gotPlayerId', function(pId) {
             if (pName) {console.log('Got ID of ['+pName+']...calling riot API to get league entry');}
@@ -234,13 +244,19 @@ function filterDataBeforeReturn(game) {
 }
 
 function getRecentMatches(pId, region) {
+    var tenMatches = [];
+    // var complete = false;
     var d = $q.defer();
 
+    // var matchHistoryOpt = {seasons: '2016',rankedQueues : ['TEAM_BUILDER_DRAFT_RANKED_5x5'] , beginIndex : '0' , endIndex : '10'};
+    // leagueAPI.getMatchHistory( pId , matchHistoryOpt, region)
     myAPI.myAPI_getRecentGames(pId, region, 0, 10)
         .then(function (result) {
             var matches = result.data;
+            // var matches = result.matches;
             var fnList = [];
             for (var i in matches) {
+                // fnList[i] = leagueAPI.getMatch(matches[i].matchId, undefined, region);
                 fnList[i] = myAPI.myAPI_getGame(matches[i].matchId, region);
             }
             $q.all(fnList).then(function (result) {
@@ -270,7 +286,6 @@ function analyseMatch(pid, matchDetail) {
             playerStats = matchDetail.participants[i];
         }
     }
-
     analysis.isVictory = playerStats.stats.winner;
     analysis.highestAchievedSeasonTier = playerStats.highestAchievedSeasonTier;
     analysis.champion = getChampion(playerStats.championId);
