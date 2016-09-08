@@ -1,14 +1,19 @@
 /**
  * Created by Yan Liu on 2016-08-24.
  */
-exports.combineRunes = function (runeLib, playerRunes) {
+var runeLib = require('../staticData/rune.json');
+var version  = runeLib.version;
+
+exports.runeVersion = version;
+
+exports.combineRunes = function (playerRunes) {
     var playerRuneGroup = {};
     var calculatedRuneGroup = {};
     for (var i in playerRunes) {
         var runeId = playerRunes[i].runeId;
         if (playerRunes[i].rank) playerRunes[i].count = playerRunes[i].rank;
         var stats = runeLib.data[runeId].stats;
-        playerRunes[i].description = runeLib.data[runeId].sanitizedDescription;;
+        playerRunes[i].description = runeLib.data[runeId].description;;
         for (var j in stats) {
             playerRunes[i].statsNumber = runeLib.data[runeId].stats[j];
             if (!playerRuneGroup[j]) {
@@ -66,3 +71,11 @@ exports.combineRunes = function (runeLib, playerRunes) {
         return (secondNum/firstNum).toFixed(2);
     }
 }
+
+
+var getRuneEvent = require('../services/updateVersion').event_updatedVer;
+getRuneEvent('rune', function () {
+    runeLib = require('../staticData/rune.json');
+    version  = runeLib.version;
+    console.log('re-required rune json file (rune.js)');
+})

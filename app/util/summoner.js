@@ -6,6 +6,7 @@ var summonerLib = JSON.parse(fs.readFileSync('./app/staticData/summoner.json', '
 var version  = summonerLib.version,
     urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/spell/';
 
+exports.summonerVersion = version;
 exports.getSummonerInfo = function(spellId) {
     var summonerList = summonerLib.data;
     for (var i in summonerList) {
@@ -17,3 +18,11 @@ exports.getSummonerInfo = function(spellId) {
         }
     }
 }
+
+var getSummonerEvent = require('../services/updateVersion').event_updatedVer;
+getSummonerEvent('summoner', function () {
+    summonerLib = require('../staticData/summoner.json');
+    version  = summonerLib.version;
+    urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/summoner/';
+    console.log('re-required summoner json file (summoner.js)');
+})

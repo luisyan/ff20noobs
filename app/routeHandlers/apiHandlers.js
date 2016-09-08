@@ -2,7 +2,7 @@ var logger = require('../util/logger').logger;
 var leagueAPI = require('leagueapi');
 var $q = require('q');
 var myAPI = require('../lib/myAPI');
-var DEFAULT = require('../constants/gameDefault');
+var DEFAULT = require('../constants/gameDefault').settings;
 var mongo = require('../db/db');
 var events = require('events');
 var ERR = require('../constants/general').ERR;
@@ -11,9 +11,9 @@ leagueAPI.init(process.env.LOLKEY, 'na');
 var fs = require('fs');
 var getSummonerSpell = require('../util/summoner').getSummonerInfo;
 var getChampion = require('../util/champion').getChampionInfo;
-var runeLib = JSON.parse(fs.readFileSync('./app/staticData/rune.json', 'utf8'));
 var CONSTANT = require('../constants/general');
 leagueAPI.setRateLimit(CONSTANT.RATE_LIMIT.TEN_SEC , CONSTANT.RATE_LIMIT.TEN_MIN);
+var championVersion = require('../util/champion').championVersion;
 
 module.exports =  function () {
     this.firstHandler = function (req, res, next) {
@@ -221,10 +221,10 @@ function filterDataBeforeReturn(game) {
     var orgnizedParticipants = {Blue: [], Purple: []};
     for (var i in players) {
         players[i].team = players[i].teamId == 100 ? 'Blue' : 'Purple';
-        players[i].profileIcon = 'http://ddragon.leagueoflegends.com/cdn/'+require('../util/champion').championVersion+'/img/profileicon/'+players[i].profileIconId+'.png'
+        players[i].profileIcon = 'http://ddragon.leagueoflegends.com/cdn/'+championVersion+'/img/profileicon/'+players[i].profileIconId+'.png'
         players[i].champion = getChampion(players[i].championId);
         players[i].summonerSpell = {spell1: getSummonerSpell(players[i].spell1Id), spell2: getSummonerSpell(players[i].spell2Id)};
-        players[i].formattedRunes = runeFormatter(runeLib, players[i].runes);
+        players[i].formattedRunes = runeFormatter(players[i].runes);
 
         delete players[i].teamId;
         delete players[i].profileIconId;
@@ -275,7 +275,7 @@ function analyseMatch(pid, matchDetail) {
     var analysis = {},
         participantId,
         playerStats,
-        itemUrlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+require('../util/champion').championVersion+'/img/item/';
+        itemUrlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+championVersion+'/img/item/';
     for (var i in matchDetail.participantIdentities) {
         if (pid == matchDetail.participantIdentities[i].player.summonerId) {
             participantId = matchDetail.participantIdentities[i].participantId;
@@ -301,7 +301,7 @@ function analyseMatch(pid, matchDetail) {
         assists: playerStats.stats.assists
     };
     analysis.summonerSpell = {spell1: getSummonerSpell(playerStats.spell1Id), spell2: getSummonerSpell(playerStats.spell2Id)};
-    analysis.formattedRunes = runeFormatter(runeLib, playerStats.runes);
+    analysis.formattedRunes = runeFormatter(playerStats.runes);
     analysis.minionsKilled = playerStats.stats.minionsKilled;
     analysis.items = [];
     if (playerStats.stats.item0 != 0) analysis.items.push({itemUrl: itemUrlSuffix + playerStats.stats.item0 + '.png'});
@@ -372,3 +372,10 @@ function getLeagueEntry(pid, region) {
     }
     return d.promise;
 }
+
+var getChampionEvent = require('../services/updateVersion').event_updatedVer;
+getChampionEvent('champion', function () {
+    championVersion  = championLib.version;
+    console.log('re-required champion json file (apiHandler)');
+})
+

@@ -15,12 +15,7 @@ module.exports = {
         var d = $q.defer();
         leagueAPI.getPlatformId(region).then(function (data) {
             var regionId = data;
-            request({
-                url: craftCurrentGameUrl(pid, region, regionId),
-                maxAttempts: CONSTANT.RIOT_API.MAX_ATTEMPTS,
-                retryDelay: CONSTANT.RIOT_API.RETRY_DELAY,
-                retryStrategy: retry429
-            }, function (err , response , body) {
+            request(getOpt(craftCurrentGameUrl(pid, region, regionId)), function (err , response , body) {
                 if (err) d.reject(body);
                 else {
                     if (response.statusCode == 404) d.resolve(resFail(JSON.parse(body)));
@@ -33,12 +28,7 @@ module.exports = {
     myAPI_getRecentGames: function (pid , region, beginIndex, endIndex) {
         var d = $q.defer();
 
-        request({
-            url: craftRecentGameUrl(pid, region, beginIndex, endIndex),
-            maxAttempts: CONSTANT.RIOT_API.MAX_ATTEMPTS,
-            retryDelay: CONSTANT.RIOT_API.RETRY_DELAY,
-            retryStrategy: retry429
-        }, function (err , response , body) {
+        request(getOpt(craftRecentGameUrl(pid, region, beginIndex, endIndex)), function (err , response , body) {
             if (err) d.reject(body);
             else {
                 if (response.statusCode == 404) d.resolve(resFail(JSON.parse(body)));
@@ -50,12 +40,7 @@ module.exports = {
     myAPI_getGame: function (mid , region) {
         var d = $q.defer();
 
-        request({
-            url: craftGameUrl(mid, region),
-            maxAttempts: CONSTANT.RIOT_API.MAX_ATTEMPTS,
-            retryDelay: CONSTANT.RIOT_API.RETRY_DELAY,
-            retryStrategy: retry429
-        }, function (err , response , body) {
+        request(getOpt(craftGameUrl(mid, region)), function (err , response , body) {
             if (err) d.reject(body);
             else {
                 if (response.statusCode == 404) d.resolve(resFail(JSON.parse(body)));
@@ -65,6 +50,28 @@ module.exports = {
 
         return d.promise;
     },
+    myAPI_getVersion: function (region) {
+        var d = $q.defer();
+
+        request(craftVersionUrl(region), function (err , response , body) {
+            if (err) d.reject(body);
+            else {
+                if (response.statusCode == 404) d.resolve(resFail(JSON.parse(body)));
+                else d.resolve(JSON.parse(body));
+            }
+        })
+
+        return d.promise;
+    },
+}
+
+var getOpt = function (url) {
+    return {
+        url: url,
+        maxAttempts: CONSTANT.RIOT_API.MAX_ATTEMPTS,
+        retryDelay: CONSTANT.RIOT_API.RETRY_DELAY,
+        retryStrategy: retry429
+    }
 }
 
 function craftCurrentGameUrl(pid, region, regionId) {
@@ -77,6 +84,10 @@ function craftRecentGameUrl(pid, region, beginIndex, endIndex) {
 
 function craftGameUrl(mid, region) {
     return 'https://'+region+'.api.pvp.net/api/lol/' + region + '/v2.2/match/' + mid + '?includeTimeline=false'+'&api_key=' + lolKey;
+}
+
+function craftVersionUrl(region) {
+    return 'https://'+region+'.api.pvp.net/api/lol/static-data/' + region + '/v1.2/versions?api_key=' + lolKey;
 }
 
 
