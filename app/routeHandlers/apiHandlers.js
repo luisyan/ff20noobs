@@ -218,29 +218,31 @@ function fnGetPlayer(name, region) {
 
 function filterDataBeforeReturn(game) {
     var players = game.participants;
-    var orgnizedParticipants = {Blue: [], Purple: []};
-    for (var i in players) {
-        players[i].team = players[i].teamId == 100 ? 'Blue' : 'Purple';
-        players[i].profileIcon = 'http://ddragon.leagueoflegends.com/cdn/'+championVersion+'/img/profileicon/'+players[i].profileIconId+'.png'
-        players[i].champion = getChampion(players[i].championId);
-        players[i].summonerSpell = {spell1: getSummonerSpell(players[i].spell1Id), spell2: getSummonerSpell(players[i].spell2Id)};
-        players[i].formattedRunes = runeFormatter(players[i].runes);
+    if (players) {
+        var orgnizedParticipants = {Blue: [], Purple: []};
+        for (var i in players) {
+            players[i].team = players[i].teamId == 100 ? 'Blue' : 'Purple';
+            players[i].profileIcon = 'http://ddragon.leagueoflegends.com/cdn/'+championVersion+'/img/profileicon/'+players[i].profileIconId+'.png'
+            players[i].champion = getChampion(players[i].championId);
+            players[i].summonerSpell = {spell1: getSummonerSpell(players[i].spell1Id), spell2: getSummonerSpell(players[i].spell2Id)};
+            players[i].formattedRunes = runeFormatter(players[i].runes);
 
-        delete players[i].teamId;
-        delete players[i].profileIconId;
-        delete players[i].championId;
-        delete players[i].runes;
-        delete players[i].spell1Id;
-        delete players[i].spell2Id;
-        //---- below is temporary ----
-        // delete players[i].summonerId; // keep player id for frontend to get match list
-        delete players[i].masteries;
+            delete players[i].teamId;
+            delete players[i].profileIconId;
+            delete players[i].championId;
+            delete players[i].runes;
+            delete players[i].spell1Id;
+            delete players[i].spell2Id;
+            //---- below is temporary ----
+            // delete players[i].summonerId; // keep player id for frontend to get match list
+            delete players[i].masteries;
 
 
-        if (players[i].team == 'Blue') orgnizedParticipants.Blue.push(players[i]);
-        else orgnizedParticipants.Purple.push(players[i]);
+            if (players[i].team == 'Blue') orgnizedParticipants.Blue.push(players[i]);
+            else orgnizedParticipants.Purple.push(players[i]);
+        }
+        game.participants = orgnizedParticipants;
     }
-    game.participants = orgnizedParticipants;
 }
 
 function getRecentMatches(pId, region) {
