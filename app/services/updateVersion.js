@@ -4,6 +4,9 @@ var jsonFile = require('jsonfile');
 var events = require('events');
 var event = new events.EventEmitter();
 var request = require('requestretry');
+var logger = require('../util/logger').updateVerLogger;
+
+logger.log('.......');
 
 setInterval(function () {
     request('https://ddragon.leagueoflegends.com/realms/na.json', function (err , response , body) {
@@ -22,13 +25,13 @@ setInterval(function () {
             compareAndWrite(localSummonerVer, remoteSummonerVer, 'summoner');
 
             function compareAndWrite(localVer, remoteVer, type) {
-                if (localVer == remoteVer) console.log('local '+type+' version is %s, same as server version %s', localVer, remoteVer);
+                if (localVer == remoteVer) logger.log('local '+type+' version is %s, same as server version %s', localVer, remoteVer);
                 else {
-                    console.log('updating local '+type+' json file...');
+                    logger.log('updating local '+type+' json file...');
                     getStaticData(cdn+'/'+remoteVer+'/data/en_US/'+type+'.json ', function (data) {
                         jsonFile.writeFile('app/staticData/'+type+'.json', data, {spaces: 2}, function(err) {
                             if (err) console.error(err);
-                            else console.log('updated '+type+' json file to %s', remoteVer);
+                            else logger.log('updated '+type+' json file to %s', remoteVer);
                             localVer = remoteVer;
                             event.emit(type+'Updated');
                         })
@@ -42,7 +45,7 @@ setInterval(function () {
 
 exports.event_updatedVer = function (type, callback) {
     event.on(type+'Updated', function() {
-        console.log('[received '+type+'Updated event] going to re-require the '+type+' module');
+        logger.log('[received '+type+'Updated event] going to re-require the '+type+' module');
         callback();
     });
 }
