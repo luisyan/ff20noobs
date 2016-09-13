@@ -2,11 +2,29 @@ var DEFAULT = require('../constants/gameDefault').settings;
 var myAPI = require('../lib/myAPI');
 var jsonFile = require('jsonfile');
 var events = require('events');
-var event = new events.EventEmitter();
+var verUpdateTimer = new events.EventEmitter();
+var verInitEvent = new events.EventEmitter();
 var request = require('requestretry');
 var logger = require('../util/logger').updateVerLogger;
 
-logger.log('.......');
+var remoteItemVer, remoteProfileIconVer;
+
+request('https://ddragon.leagueoflegends.com/realms/na.json', function (err , response , body) {
+    var body = JSON.parse(body);
+    if (err) console.error(err);
+    else {
+        remoteItemVer = body.n.item;
+        remoteProfileIconVer = body.n.profileicon;
+
+        verInitEvent.emit('updateItem&profileIcon', {item: remoteItemVer, profileIcon: remoteProfileIconVer});
+    }
+});
+
+exports.getItemNprofileIconVer = function (callback) {
+    verInitEvent.on('updateItem&profileIcon', function (data) {
+        callback(data);
+    })
+}
 
 setInterval(function () {
     request('https://ddragon.leagueoflegends.com/realms/na.json', function (err , response , body) {
@@ -33,18 +51,17 @@ setInterval(function () {
                             if (err) console.error(err);
                             else logger.log('updated '+type+' json file to %s', remoteVer);
                             localVer = remoteVer;
-                            event.emit(type+'Updated');
+                            verUpdateTimer.emit(type+'Updated');
                         })
                     })
                 }
             }
-
         }
     })
 },1000*60*30);
 
 exports.event_updatedVer = function (type, callback) {
-    event.on(type+'Updated', function() {
+    verUpdateTimer.on(type+'Updated', function() {
         logger.log('[received '+type+'Updated event] going to re-require the '+type+' module');
         callback();
     });
