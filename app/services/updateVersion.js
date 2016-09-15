@@ -89,7 +89,7 @@ setInterval(function () {
             }
         }
     })
-},3000);
+},1000*60*30);
 
 exports.event_updatedVer = function (type, callback) {
     verUpdateTimer.on(type+'Updated', function() {
