@@ -28,5 +28,4 @@ getChampionEvent('champion', function () {
     championLib = require('../staticData/champion.json');
     version  = championLib.version;
     urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/champion/';
-    console.log('re-required champion json file (champion.js)');
 })

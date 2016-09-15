@@ -77,5 +77,4 @@ var getRuneEvent = require('../services/updateVersion').event_updatedVer;
 getRuneEvent('rune', function () {
     runeLib = require('../staticData/rune.json');
     version  = runeLib.version;
-    console.log('re-required rune json file (rune.js)');
 })

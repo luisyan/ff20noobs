@@ -6,6 +6,7 @@ var verUpdateTimer = new events.EventEmitter();
 var verInitEvent = new events.EventEmitter();
 var request = require('requestretry');
 var logger = require('../util/logger').updateVerLogger;
+var $q = require('q');
 
 var remoteItemVer, remoteProfileIconVer;
 
@@ -38,31 +39,61 @@ setInterval(function () {
             remoteProfileIconVer = body.n.profileicon;
         if (err) console.error(err);
         else {
-            compareAndWrite(localChampionVer, remoteChampionVer, 'champion');
-            compareAndWrite(localRuneVer, remoteRuneVer, 'rune');
-            compareAndWrite(localSummonerVer, remoteSummonerVer, 'summoner');
+            var fn1 = compareAndWrite(localChampionVer, remoteChampionVer, 'champion');
+            var fn2 = compareAndWrite(localRuneVer, remoteRuneVer, 'rune');
+            var fn3 = compareAndWrite(localSummonerVer, remoteSummonerVer, 'summoner');
+
+            $q.all([fn1, fn2, fn3]).then(function (result) {
+                var msg_match = '[MATCH]',
+                    msg_not_match = '[NOT MATCH]';
+                for (var i in result) {
+                    if (result[i].match) msg_match = msg_match + result[i].type + ': ' + result[i].remoteVersion + ' | ';
+                    else msg_not_match = msg_not_match + result[i].type + ': local ' + result[i].localVersion + ' remote ' + result[i].remoteVersion + ' | ';
+                }
+                if (msg_match == '[MATCH]') msg_match = '';
+                if (msg_not_match == '[NOT MATCH]') msg_not_match = '';
+                if (msg_match) logger.log(msg_match+'\t'+msg_not_match);
+                else logger.log(msg_not_match);
+            })
 
             function compareAndWrite(localVer, remoteVer, type) {
-                if (localVer == remoteVer) logger.log('local '+type+' version is %s, same as server version %s', localVer, remoteVer);
+                var d = $q.defer();
+                if (localVer == remoteVer) {
+                    // logger.log('[MATCH]'+type+': %s', remoteVer);
+                    d.resolve({match: true, type: type, remoteVersion: remoteVer})
+                }
                 else {
-                    logger.log('updating local '+type+' json file...');
+                    d.resolve({match: false, type: type, remoteVersion: remoteVer, localVersion: localVer})
+                    // logger.log('updating local '+type+' json file...');
                     getStaticData(cdn+'/'+remoteVer+'/data/en_US/'+type+'.json ', function (data) {
                         jsonFile.writeFile('app/staticData/'+type+'.json', data, {spaces: 2}, function(err) {
                             if (err) console.error(err);
-                            else logger.log('updated '+type+' json file to %s', remoteVer);
-                            localVer = remoteVer;
+                            else logger.trace('updated '+type+' json file to %s', remoteVer);
+                            switch (type) {
+                                case 'champion':
+                                    localChampionVer = remoteVer;
+                                    break;
+                                case 'rune':
+                                    localRuneVer = remoteVer;
+                                    break;
+                                case 'summoner':
+                                    localSummonerVer = remoteVer;
+                                    break;
+                                default:
+                            }
                             verUpdateTimer.emit(type+'Updated');
                         })
                     })
                 }
+                return d.promise;
             }
         }
     })
-},1000*60*30);
+},3000);
 
 exports.event_updatedVer = function (type, callback) {
     verUpdateTimer.on(type+'Updated', function() {
-        logger.log('[received '+type+'Updated event] going to re-require the '+type+' module');
+        var msg = '[received '+type+'Updated event] going to re-require the '+type+' module';
         callback();
     });
 }

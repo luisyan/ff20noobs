@@ -382,7 +382,7 @@ function getLeagueEntry(pid, region) {
 
 var getChampionEvent = require('../services/updateVersion').event_updatedVer;
 getChampionEvent('champion', function () {
+    var championLib = require('../staticData/champion.json');
     championVersion  = championLib.version;
-    console.log('re-required champion json file (apiHandler)');
 })
 

@@ -24,5 +24,4 @@ getSummonerEvent('summoner', function () {
     summonerLib = require('../staticData/summoner.json');
     version  = summonerLib.version;
     urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/summoner/';
-    console.log('re-required summoner json file (summoner.js)');
 })
