@@ -258,7 +258,7 @@ function filterDataBeforeReturn(game) {
         blue: blueBan,
         purple: purpleBan
     }
-    delete game.bannedChampions;
+    // delete game.bannedChampions;
 }
 
 function getRecentMatches(pId, region) {
