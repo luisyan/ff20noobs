@@ -248,6 +248,17 @@ function filterDataBeforeReturn(game) {
         }
         game.participants = orgnizedParticipants;
     }
+    var blueBan = [],
+        purpleBan = [];
+    for (var i in game.bannedChampions) {
+        if (game.bannedChampions[i].teamId == 100) blueBan.push(getChampion(game.bannedChampions[i].championId));
+        else purpleBan.push(getChampion(game.bannedChampions[i].championId));
+    }
+    game.ban = {
+        blue: blueBan,
+        purple: purpleBan
+    }
+    delete game.bannedChampions;
 }
 
 function getRecentMatches(pId, region) {
