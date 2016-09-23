@@ -11,12 +11,14 @@ exports.getChampionInfo = function(championId) {
     for (var i in championList) {
         if (championId == championList[i].key) {
             return {
+                id: championList[i].key,
                 name: championList[i].name,
                 url: urlSuffix + championList[i].image.full
             }
         }
     }
     return {
+        id: null,
         name: null,
         url: null
     }

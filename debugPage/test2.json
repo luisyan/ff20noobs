@@ -1,0 +1,189 @@
+{
+  "leagueEntry": {
+    "tier": "SILVER",
+    "queue": "RANKED_SOLO_5x5",
+    "division": "II",
+    "leaguePoints": 91,
+    "wins": 10,
+    "losses": 7,
+    "playstyle": "NONE"
+  },
+  "rankStats": {
+    "0": {
+      "championId": 0,
+      "champion": {
+        "name": "All Champions",
+        "url": null
+      },
+      "totalSessionsPlayed": 17,
+      "winningRate": "59%",
+      "averageStats": {
+        "kills": "11.3",
+        "deaths": "6.4",
+        "assists": "6.9",
+        "cs": "150",
+        "gold": "13438"
+      }
+    },
+    "1": {
+      "championId": 1,
+      "champion": {
+        "name": "Annie",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Annie.png"
+      },
+      "totalSessionsPlayed": 2,
+      "winningRate": "50%",
+      "averageStats": {
+        "kills": "11.0",
+        "deaths": "6.5",
+        "assists": "10.0",
+        "cs": "152",
+        "gold": "14000"
+      }
+    },
+    "21": {
+      "championId": 21,
+      "champion": {
+        "name": "Miss Fortune",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/MissFortune.png"
+      },
+      "totalSessionsPlayed": 2,
+      "winningRate": "0%",
+      "averageStats": {
+        "kills": "4.0",
+        "deaths": "8.0",
+        "assists": "7.0",
+        "cs": "166",
+        "gold": "10167"
+      }
+    },
+    "22": {
+      "championId": 22,
+      "champion": {
+        "name": "Ashe",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Ashe.png"
+      },
+      "totalSessionsPlayed": 1,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "20.0",
+        "deaths": "10.0",
+        "assists": "12.0",
+        "cs": "172",
+        "gold": "18124"
+      }
+    },
+    "39": {
+      "championId": 39,
+      "champion": {
+        "name": "Irelia",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Irelia.png"
+      },
+      "totalSessionsPlayed": 3,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "11.7",
+        "deaths": "2.0",
+        "assists": "4.0",
+        "cs": "136",
+        "gold": "11264"
+      }
+    },
+    "51": {
+      "championId": 51,
+      "champion": {
+        "name": "Caitlyn",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Caitlyn.png"
+      },
+      "totalSessionsPlayed": 3,
+      "winningRate": "0%",
+      "averageStats": {
+        "kills": "10.0",
+        "deaths": "6.7",
+        "assists": "4.7",
+        "cs": "155",
+        "gold": "11875"
+      }
+    },
+    "84": {
+      "championId": 84,
+      "champion": {
+        "name": "Akali",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Akali.png"
+      },
+      "totalSessionsPlayed": 2,
+      "winningRate": "50%",
+      "averageStats": {
+        "kills": "9.0",
+        "deaths": "8.0",
+        "assists": "3.0",
+        "cs": "118",
+        "gold": "9197"
+      }
+    },
+    "102": {
+      "championId": 102,
+      "champion": {
+        "name": "Shyvana",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Shyvana.png"
+      },
+      "totalSessionsPlayed": 1,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "6.0",
+        "deaths": "5.0",
+        "assists": "7.0",
+        "cs": "101",
+        "gold": "16121"
+      }
+    },
+    "103": {
+      "championId": 103,
+      "champion": {
+        "name": "Ahri",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Ahri.png"
+      },
+      "totalSessionsPlayed": 1,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "9.0",
+        "deaths": "10.0",
+        "assists": "12.0",
+        "cs": "148",
+        "gold": "19787"
+      }
+    },
+    "133": {
+      "championId": 133,
+      "champion": {
+        "name": "Quinn",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Quinn.png"
+      },
+      "totalSessionsPlayed": 1,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "24.0",
+        "deaths": "8.0",
+        "assists": "14.0",
+        "cs": "217",
+        "gold": "22349"
+      }
+    },
+    "222": {
+      "championId": 222,
+      "champion": {
+        "name": "Jinx",
+        "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Jinx.png"
+      },
+      "totalSessionsPlayed": 1,
+      "winningRate": "100%",
+      "averageStats": {
+        "kills": "20.0",
+        "deaths": "5.0",
+        "assists": "6.0",
+        "cs": "161",
+        "gold": "15921"
+      }
+    }
+  }
+}

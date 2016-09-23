@@ -1,678 +1,444 @@
 {
   "resultCode": 0,
-  "data": [
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Udyr",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Udyr.png"
-      },
-      "lane": "JUNGLE",
-      "kda": {
-        "kills": 0,
-        "deaths": 4,
-        "assists": 2
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
+  "data": {
+    "gameId": 2299182428,
+    "mapId": 11,
+    "gameMode": "CLASSIC",
+    "gameType": "MATCHED_GAME",
+    "gameQueueConfigId": 410,
+    "participants": {
+      "Blue": [
+        {
+          "summonerName": "virgin maker",
+          "bot": false,
+          "summonerId": 37316528,
+          "team": "Blue",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/979.png",
+          "champion": {
+            "name": "Malphite",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Malphite.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Teleport",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerTeleport.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "FlatPhysicalDamageMod": {
+              "finalNumber": "8.50",
+              "description": "8.50 attack damage"
+            },
+            "PercentAttackSpeedMod": {
+              "finalNumber": "16.05",
+              "description": "16.05% attack speed"
+            },
+            "rFlatSpellBlockModPerLevel": {
+              "finalNumber": "0.83",
+              "description": "0.815.56 magic resist per level (+3 at champion level 18)"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "9.00",
+              "description": "9.00 armor"
+            }
+          }
         },
-        "spell2": {
-          "name": "Smite",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerSmite.png"
+        {
+          "summonerName": "Y MyTeamSoTox1c",
+          "bot": false,
+          "summonerId": 63534175,
+          "team": "Blue",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/948.png",
+          "champion": {
+            "name": "Brand",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Brand.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            },
+            "spell2": {
+              "name": "Ignite",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerDot.png"
+            }
+          },
+          "formattedRunes": {
+            "rFlatMagicPenetrationMod": {
+              "finalNumber": "7.83",
+              "description": "7.83 magic penetration"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "12.06",
+              "description": "12.06 magic resist"
+            },
+            "rFlatHPModPerLevel": {
+              "finalNumber": "4.00",
+              "description": "4.00 health per level (+72.20 at champion level 18)"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "6.00",
+              "description": "6.00 armor"
+            },
+            "FlatMagicDamageMod": {
+              "finalNumber": "14.85",
+              "description": "14.85 ability power"
+            }
+          }
+        },
+        {
+          "summonerName": "Harpoon The Moon",
+          "bot": false,
+          "summonerId": 19197909,
+          "team": "Blue",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/745.png",
+          "champion": {
+            "name": "Gragas",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Gragas.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            },
+            "spell2": {
+              "name": "Smite",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerSmite.png"
+            }
+          },
+          "formattedRunes": {
+            "rFlatMagicPenetrationMod": {
+              "finalNumber": "7.83",
+              "description": "7.83 magic penetration"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "12.06",
+              "description": "12.06 magic resist"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "9.00",
+              "description": "9.00 armor"
+            },
+            "FlatMagicDamageMod": {
+              "finalNumber": "14.85",
+              "description": "14.85 ability power"
+            }
+          }
+        },
+        {
+          "summonerName": "Syz123",
+          "bot": false,
+          "summonerId": 72199114,
+          "team": "Blue",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/948.png",
+          "champion": {
+            "name": "Lucian",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Lucian.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            },
+            "spell2": {
+              "name": "Heal",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerHeal.png"
+            }
+          },
+          "formattedRunes": {
+            "FlatPhysicalDamageMod": {
+              "finalNumber": "8.50",
+              "description": "8.50 attack damage"
+            },
+            "PercentAttackSpeedMod": {
+              "finalNumber": "16.68",
+              "description": "16.68% attack speed"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "5.36",
+              "description": "5.36 magic resist"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "9.00",
+              "description": "9.00 armor"
+            }
+          }
+        },
+        {
+          "summonerName": "Vnkxxxt",
+          "bot": false,
+          "summonerId": 67309121,
+          "team": "Blue",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/1301.png",
+          "champion": {
+            "name": "Nami",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Nami.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Exhaust",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerExhaust.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "rFlatMagicPenetrationMod": {
+              "finalNumber": "7.83",
+              "description": "7.83 magic penetration"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "12.06",
+              "description": "12.06 magic resist"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "9.00",
+              "description": "9.00 armor"
+            },
+            "FlatMagicDamageMod": {
+              "finalNumber": "14.85",
+              "description": "14.85 ability power"
+            }
+          }
         }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 18,
-      "items": [
+      ],
+      "Purple": [
         {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1416.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/2032.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3047.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1042.png"
+          "summonerName": "Petertsa123",
+          "bot": false,
+          "summonerId": 68969613,
+          "team": "Purple",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/1298.png",
+          "champion": {
+            "name": "Blitzcrank",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Blitzcrank.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Exhaust",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerExhaust.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "FlatMagicDamageMod": {
+              "finalNumber": "30.91",
+              "description": "30.91 ability power"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "9.00",
+              "description": "9.00 armor"
+            }
+          }
         },
         {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3044.png"
+          "summonerName": "Daddy of League",
+          "bot": false,
+          "summonerId": 35798637,
+          "team": "Purple",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/685.png",
+          "champion": {
+            "name": "Twisted Fate",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/TwistedFate.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Ghost",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerHaste.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "rFlatMagicPenetrationMod": {
+              "finalNumber": "7.83",
+              "description": "7.83 magic penetration"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "12.06",
+              "description": "12.06 magic resist"
+            },
+            "rFlatHPModPerLevel": {
+              "finalNumber": "12.00",
+              "description": "12.00 health per level (+216.60 at champion level 18)"
+            },
+            "FlatMagicDamageMod": {
+              "finalNumber": "14.85",
+              "description": "14.85 ability power"
+            }
+          }
         },
         {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Ekko",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Ekko.png"
-      },
-      "lane": "JUNGLE",
-      "kda": {
-        "kills": 0,
-        "deaths": 5,
-        "assists": 4
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Smite",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerSmite.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 65,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3146.png"
+          "summonerName": "Shouki",
+          "bot": false,
+          "summonerId": 22966120,
+          "team": "Purple",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/554.png",
+          "champion": {
+            "name": "Ezreal",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Ezreal.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            },
+            "spell2": {
+              "name": "Heal",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerHeal.png"
+            }
+          },
+          "formattedRunes": {
+            "FlatPhysicalDamageMod": {
+              "finalNumber": "15.25",
+              "description": "15.25 attack damage"
+            },
+            "FlatSpellBlockMod": {
+              "finalNumber": "12.06",
+              "description": "12.06 magic resist"
+            },
+            "FlatArmorMod": {
+              "finalNumber": "5.00",
+              "description": "5.00 armor"
+            },
+            "rFlatArmorModPerLevel": {
+              "finalNumber": "0.67",
+              "description": "0.67 armor per level (+12.56 at champion level 18)"
+            }
+          }
         },
         {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/2031.png"
+          "summonerName": "SIERRAInddy",
+          "bot": false,
+          "summonerId": 76451835,
+          "team": "Purple",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/28.png",
+          "champion": {
+            "name": "Graves",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Graves.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Smite",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerSmite.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "rFlatArmorPenetrationMod": {
+              "finalNumber": "11.52",
+              "description": "11.52 armor penetration"
+            },
+            "PercentAttackSpeedMod": {
+              "finalNumber": "17.96",
+              "description": "17.96% attack speed"
+            },
+            "rFlatSpellBlockModPerLevel": {
+              "finalNumber": "0.33",
+              "description": "0.6.193 magic resist per level (+3 at champion level 18)"
+            },
+            "rFlatHPModPerLevel": {
+              "finalNumber": "12.00",
+              "description": "12.00 health per level (+216.60 at champion level 18)"
+            }
+          }
         },
         {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1001.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1402.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1011.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1029.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": true,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Olaf",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Olaf.png"
-      },
-      "lane": "JUNGLE",
-      "kda": {
-        "kills": 0,
-        "deaths": 0,
-        "assists": 0
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Smite",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerSmite.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 0,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1039.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/2031.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Yasuo",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Yasuo.png"
-      },
-      "lane": "TOP",
-      "kda": {
-        "kills": 2,
-        "deaths": 8,
-        "assists": 1
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Teleport",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerTeleport.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 136,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1028.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3140.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1053.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3046.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3111.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": true,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Yasuo",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Yasuo.png"
-      },
-      "lane": "TOP",
-      "kda": {
-        "kills": 6,
-        "deaths": 4,
-        "assists": 5
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Teleport",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerTeleport.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 166,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3140.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/2031.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3046.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3022.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1053.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Gnar",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Gnar.png"
-      },
-      "lane": "TOP",
-      "kda": {
-        "kills": 5,
-        "deaths": 6,
-        "assists": 4
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Teleport",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerTeleport.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 128,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/2031.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3022.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3047.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3071.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1033.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
+          "summonerName": "Keven",
+          "bot": false,
+          "summonerId": 39595415,
+          "team": "Purple",
+          "profileIcon": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/profileicon/926.png",
+          "champion": {
+            "name": "Yasuo",
+            "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/champion/Yasuo.png"
+          },
+          "summonerSpell": {
+            "spell1": {
+              "name": "Teleport",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerTeleport.png"
+            },
+            "spell2": {
+              "name": "Flash",
+              "url": "http://ddragon.leagueoflegends.com/cdn/6.19.1/img/spell/SummonerFlash.png"
+            }
+          },
+          "formattedRunes": {
+            "PercentAttackSpeedMod": {
+              "finalNumber": "13.58",
+              "description": "13.58% attack speed"
+            },
+            "FlatCritChanceMod": {
+              "finalNumber": "0.93",
+              "description": "0.93% critical chance"
+            },
+            "rFlatSpellBlockModPerLevel": {
+              "finalNumber": "1.50",
+              "description": "1.50 magic resist per level (+28.13 at champion level 18)"
+            },
+            "rFlatHPModPerLevel": {
+              "finalNumber": "12.00",
+              "description": "12.00 health per level (+216.60 at champion level 18)"
+            },
+            "PercentLifeStealMod": {
+              "finalNumber": "4.50",
+              "description": "4.50% Life Steal."
+            }
+          }
         }
       ]
     },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Draven",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Draven.png"
-      },
-      "lane": "ADC",
-      "kda": {
-        "kills": 2,
-        "deaths": 14,
-        "assists": 8
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Heal",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerHeal.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 137,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3142.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3139.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3046.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3006.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
+    "observers": {
+      "encryptionKey": "vwGxX1ukN7iFtBAXp9WWFOKpNj5B95oT"
     },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Draven",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Draven.png"
+    "platformId": "NA1",
+    "bannedChampions": [
+      {
+        "championId": 21,
+        "teamId": 100,
+        "pickTurn": 1
       },
-      "lane": "ADC",
-      "kda": {
-        "kills": 4,
-        "deaths": 6,
-        "assists": 5
+      {
+        "championId": 39,
+        "teamId": 200,
+        "pickTurn": 2
       },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Heal",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerHeal.png"
-        }
+      {
+        "championId": 202,
+        "teamId": 100,
+        "pickTurn": 3
       },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
+      {
+        "championId": 16,
+        "teamId": 200,
+        "pickTurn": 4
       },
-      "minionsKilled": 178,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3142.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3139.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3046.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3006.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Sivir",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Sivir.png"
+      {
+        "championId": 56,
+        "teamId": 100,
+        "pickTurn": 5
       },
-      "lane": "ADC",
-      "kda": {
-        "kills": 7,
-        "deaths": 3,
-        "assists": 10
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Heal",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerHeal.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 210,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1055.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3031.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3508.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3158.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3046.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    },
-    {
-      "isVictory": false,
-      "highestAchievedSeasonTier": "UNRANKED",
-      "champion": {
-        "name": "Shen",
-        "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/champion/Shen.png"
-      },
-      "lane": "TOP",
-      "kda": {
-        "kills": 2,
-        "deaths": 8,
-        "assists": 7
-      },
-      "summonerSpell": {
-        "spell1": {
-          "name": "Flash",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerFlash.png"
-        },
-        "spell2": {
-          "name": "Teleport",
-          "url": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/spell/SummonerTeleport.png"
-        }
-      },
-      "formattedRunes": {
-        "PercentAttackSpeedMod": {
-          "finalNumber": "27.08",
-          "description": "27.08% attack speed"
-        },
-        "FlatCritChanceMod": {
-          "finalNumber": "0.93",
-          "description": "0.93% critical chance"
-        },
-        "FlatSpellBlockMod": {
-          "finalNumber": "10.72",
-          "description": "10.72 magic resist"
-        },
-        "rFlatSpellBlockModPerLevel": {
-          "finalNumber": "0.17",
-          "description": "0.17 magic resist per level (+3.19 at champion level 18)"
-        },
-        "FlatArmorMod": {
-          "finalNumber": "9.00",
-          "description": "9.00 armor"
-        }
-      },
-      "minionsKilled": 154,
-      "items": [
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/1054.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3748.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3068.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3102.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3047.png"
-        },
-        {
-          "itemUrl": "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/3340.png"
-        }
-      ]
-    }
-  ]
+      {
+        "championId": 154,
+        "teamId": 200,
+        "pickTurn": 6
+      }
+    ],
+    "gameStartTime": 1474514116605,
+    "gameLength": -109
+  }
 }
