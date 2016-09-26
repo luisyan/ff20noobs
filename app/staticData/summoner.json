@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "6.18.1",
+  "version": "6.19.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -9,15 +9,27 @@
       "tooltip": "Temporarily shields {{ f1 }} damage from your champion for 2 seconds.",
       "maxrank": 1,
       "cooldown": [
-        210
+        180
       ],
-      "cooldownBurn": "210",
+      "cooldownBurn": "180",
       "cost": [
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          95
+        ],
+        [
+          20
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "95",
+        "20"
+      ],
       "vars": [],
       "key": "21",
       "summonerLevel": 4,
@@ -59,8 +71,20 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          0.65
+        ],
+        [
+          3
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "0.65",
+        "3"
+      ],
       "vars": [
         {
           "link": "@text",
@@ -94,52 +118,6 @@
       },
       "resource": "No Cost"
     },
-    "SummonerClairvoyance": {
-      "id": "SummonerClairvoyance",
-      "name": "Clairvoyance",
-      "description": "Reveals a small area of the map for your team for 5 seconds.",
-      "tooltip": "Reveals a small area of the map for your team for {{ f1 }} seconds.",
-      "maxrank": 1,
-      "cooldown": [
-        240
-      ],
-      "cooldownBurn": "240",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
-      "vars": [
-        {
-          "link": "@text",
-          "coeff": 4,
-          "key": "f1"
-        }
-      ],
-      "key": "2",
-      "summonerLevel": 8,
-      "modes": [
-        "ODIN",
-        "ASCENSION"
-      ],
-      "costType": "NoCost",
-      "maxammo": "-1",
-      "range": [
-        25000
-      ],
-      "rangeBurn": "25000",
-      "image": {
-        "full": "SummonerClairvoyance.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 96,
-        "y": 0,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
-    },
     "SummonerDot": {
       "id": "SummonerDot",
       "name": "Ignite",
@@ -155,9 +133,9 @@
       },
       "maxrank": 1,
       "cooldown": [
-        180
+        210
       ],
-      "cooldownBurn": "180",
+      "cooldownBurn": "210",
       "cost": [
         0
       ],
@@ -165,16 +143,24 @@
       "effect": [
         null,
         [
-          500
+          5
         ],
         [
-          150
+          10
+        ],
+        [
+          4
+        ],
+        [
+          100
         ]
       ],
       "effectBurn": [
         null,
-        "500",
-        "150"
+        "5",
+        "10",
+        "4",
+        "100"
       ],
       "vars": [
         {
@@ -242,8 +228,32 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          2.5
+        ],
+        [
+          40
+        ],
+        [
+          30
+        ],
+        [
+          10
+        ],
+        [
+          30
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "2.5",
+        "40",
+        "30",
+        "10",
+        "30"
+      ],
       "vars": [],
       "key": "3",
       "summonerLevel": 4,
@@ -285,8 +295,16 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          400
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "400"
+      ],
       "vars": [],
       "key": "4",
       "summonerLevel": 8,
@@ -321,15 +339,27 @@
       "tooltip": "Your champion can move through units and has {{ f1 }}% increased Movement Speed for 10 seconds.",
       "maxrank": 1,
       "cooldown": [
-        210
+        180
       ],
-      "cooldownBurn": "210",
+      "cooldownBurn": "180",
       "cost": [
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          27
+        ],
+        [
+          1
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "27",
+        "1"
+      ],
       "vars": [
         {
           "link": "@text",
@@ -378,8 +408,32 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          0.3
+        ],
+        [
+          75
+        ],
+        [
+          15
+        ],
+        [
+          0.5
+        ],
+        [
+          826
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "0.3",
+        "75",
+        "15",
+        "0.5",
+        "826"
+      ],
       "vars": [
         {
           "link": "@player.level",
@@ -447,8 +501,20 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          50
+        ],
+        [
+          25
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "50",
+        "25"
+      ],
       "vars": [
         {
           "link": "@player.level",
@@ -537,8 +603,16 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          3000
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "3000"
+      ],
       "vars": [],
       "key": "30",
       "summonerLevel": 1,
@@ -576,8 +650,20 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          20
+        ],
+        [
+          10
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "20",
+        "10"
+      ],
       "vars": [],
       "key": "31",
       "summonerLevel": 1,
@@ -680,8 +766,28 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          1200
+        ],
+        [
+          20
+        ],
+        [
+          10
+        ],
+        [
+          0.5
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "1200",
+        "20",
+        "10",
+        "0.5"
+      ],
       "vars": [],
       "key": "32",
       "summonerLevel": 1,
@@ -719,8 +825,20 @@
         0
       ],
       "costBurn": "0",
-      "effect": [],
-      "effectBurn": [],
+      "effect": [
+        null,
+        [
+          4.5
+        ],
+        [
+          200
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "4.5",
+        "200"
+      ],
       "vars": [
         {
           "link": "@text",

@@ -23,5 +23,5 @@ var getSummonerEvent = require('../services/updateVersion').event_updatedVer;
 getSummonerEvent('summoner', function () {
     summonerLib = require('../staticData/summoner.json');
     version  = summonerLib.version;
-    urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/summoner/';
+    urlSuffix = 'http://ddragon.leagueoflegends.com/cdn/'+ version +'/img/spell/';
 })

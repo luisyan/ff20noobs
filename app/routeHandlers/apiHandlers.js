@@ -240,7 +240,7 @@ function filterDataBeforeReturn(game) {
             delete players[i].spell2Id;
             //---- below is temporary ----
             // delete players[i].summonerId; // keep player id for frontend to get match list
-            delete players[i].masteries;
+            // delete players[i].masteries;
 
 
             if (players[i].team == 'Blue') orgnizedParticipants.Blue.push(players[i]);

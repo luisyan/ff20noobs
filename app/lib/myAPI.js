@@ -103,11 +103,11 @@ function retry429(err, response, body){;
         rateLimitType = response.headers['X-Rate-Limit-Type'],
         retryAfter = response.headers['Retry-After'];
     var notCausedByUser = !rateLimitType && !retryAfter;
-    var tmpArray = rateLimitCount.split(/[:,]/g),
-        limit_10_sec = Number(tmpArray[0]),
-        limit_10_min = Number(tmpArray[2]);
-    var overLimit_10sec = limit_10_sec > 2950;
-    var overLimit_10min = limit_10_min > 170000;
+    var tmpArray = rateLimitCount ? rateLimitCount.split(/[:,]/g) : null,
+        limit_10_sec = tmpArray ? Number(tmpArray[0]) : null,
+        limit_10_min = tmpArray ? Number(tmpArray[2]) : null;
+    var overLimit_10sec = limit_10_sec ? limit_10_sec > 2950 : null;
+    var overLimit_10min = limit_10_min ? limit_10_min > 170000 : null;
     var tooMuchCalls = overLimit_10sec || overLimit_10min;
 
     console.log('attempts: %d\ttooMuchCalls: %s\tnotCausedByUser: %s\trequest:[10sec: %d] [10min: %d]',response.attempts, tooMuchCalls, notCausedByUser, limit_10_sec, limit_10_min);
